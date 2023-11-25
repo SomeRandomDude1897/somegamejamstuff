@@ -37,8 +37,9 @@ class Level:
                 CheckCollisions(self)
 
                 # потом будет происходить отрисовка
+                self.display.fill((100, 150, 200)) 
                 for obj in self.objects:
-                    self.display.blit(obj.GetSprite(), obj.GetRect())
+                    self.display.blit(obj.GetSprite(), (obj.rect.x, obj.rect.y))
                     continue
 
 

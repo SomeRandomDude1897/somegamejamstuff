@@ -11,8 +11,8 @@ class Player(Object):
     def Collide(self):
         return
     def Move(self):
-        self.x += self.x_velocity
-        self.y += self.y_velocity
+        self.rect.x += self.x_velocity
+        self.rect.y += self.y_velocity
     def AddForce(self, x_delta, y_delta):
         self.x_velocity += x_delta
         self.y_velocity += y_delta
