@@ -1,6 +1,8 @@
 from player import Player
 from player_interface import Interface
 from animation import Animation
+from object import Object
+
 import pygame
 class Level:
     def __init__(self, objects, display, clock):
@@ -19,13 +21,17 @@ class Level:
             player_sprite = Animation([pygame.image.load("cube.png")])
             player_object = Player(100, 100, 32, 32, player_sprite)
 
-            self.objects.append(player_object)
-
             UI = Interface()
 
             self.display.fill((100, 150, 200)) # это надо переделать я пока чисто для теста это добавил
 
+            platform_sprite = Animation([pygame.image.load("./sprites/base_platform.png")])
 
+            platform_coords = ((0, 656), (64, 656), (128, 656), (192, 656), (256, 656), (320, 656), (384, 656), (448, 656), (512, 656), (576, 656), (640, 656), (704, 656), (768, 656), (832, 656), (896, 656), (960, 656), (1024, 656), (1088, 656),
+            (200, 600), (264, 600), (460, 520), (524, 520))
+
+            for platform in platform_coords:
+                self.objects.append(Object(platform[0], platform[1], 64, 64, False, platform_sprite))
 
             game_over = False
 
@@ -38,7 +44,8 @@ class Level:
 
                 # потом будет происходить отрисовка
                 for obj in self.objects:
-                    self.display.blit(obj.GetSprite(), obj.GetRect())
+                    obj.Draw(self.display)
+                    # self.display.blit(obj.GetSprite(), obj.GetRect())
                     continue
 
 
