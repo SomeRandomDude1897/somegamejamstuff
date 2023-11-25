@@ -5,7 +5,7 @@ from object import Object
 from moving_object import MovingObject
 import sys
 
-W = 1080
+W = 720
 H = 720
 
 clock = pygame.time.Clock()
