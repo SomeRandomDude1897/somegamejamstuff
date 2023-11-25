@@ -16,7 +16,7 @@ class Level:
             def Flip():
                 return
 
-            player_sprite = Animation([pygame.image.load("cube.png")])
+            player_sprite = Animation([pygame.image.load("cube.png"), pygame.image.load("cube2.png")])
             player_object = Player(100, 100, 32, 32, player_sprite)
 
             self.objects.append(player_object)
