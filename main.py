@@ -18,7 +18,7 @@ display = pygame.display.set_mode((W, H))
 entities = []
 block = pygame.Surface((60, 60))
 block.fill((50, 50, 50))
-block = MovingObject(500, 500, 32, 32, Animation([block]), 80, 80)
+block = MovingObject(300, 250, 60, 60, 0, Animation([block]), 0, 150)
 
 entities.append(block)
 

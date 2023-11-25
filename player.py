@@ -1,8 +1,8 @@
 import pygame
 from object import Object
 class Player(Object):
-    def __init__(self, start_x, start_y, width, heigth, idle_animation):
-        Object.__init__(self, start_x, start_y, width, heigth, idle_animation)
+    def __init__(self, start_x, start_y, width, heigth, is_threat, idle_animation):
+        Object.__init__(self, start_x, start_y, width, heigth, is_threat, idle_animation)
         self.x_velocity = 0
         self.y_velocity = 0
         self.alive = True
@@ -19,22 +19,21 @@ class Player(Object):
     def GetRect(self):
         return self.rect
     
-    def collide(self, xvel, yvel, objects):
-        for p in objects:
-            if pygame.sprite.collide_rect(self, p): # если есть пересечение платформы с игроком
+    def collide(self, object):
+        if pygame.sprite.collide_rect(self, object): # если есть пересечение платформы с игроком
+            if object.is_threat:
+                self.alive = False
 
-                if xvel > 0:                      # если движется вправо
-                    self.rect.right = p.rect.left # то не движется вправо
+            if self.rect.top - self.heidth < object.rect.top:                      # если падает вниз
+                self.rect.bottom = object.rect.top # то не падает вниз
+  
+            elif self.rect.bottom + self.heidth > object.rect.bottom :                      # если движется вверх
+                self.rect.top = object.rect.bottom # то не движется вверх
 
-                if xvel < 0:                      # если движется влево
-                    self.rect.left = p.rect.right # то не движется влево
+            elif self.rect.right > object.rect.left:                      # если движется вправо
+                self.rect.right = object.rect.left # то не движется вправо
 
-                if yvel > 0:                      # если падает вниз
-                    self.rect.bottom = p.rect.top # то не падает вниз
-                    self.onGround = True          # и становится на что-то твердое
-                    self.yvel = 0                 # и энергия падения пропадает
+            elif self.rect.left < object.rect.right:                      # если движется влево
+                self.rect.left = object.rect.right # то не движется влево
 
-                if yvel < 0:                      # если движется вверх
-                    self.rect.top = p.rect.bottom # то не движется вверх
-                    self.yvel = 0                 # и энергия прыжка пропадает
 

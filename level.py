@@ -17,13 +17,10 @@ class Level:
                 return
 
             player_sprite = Animation([pygame.image.load("cube.png"), pygame.image.load("cube2.png")])
-            player_object = Player(100, 100, 32, 32, player_sprite)
+            player_object = Player(300, 350, 32, 32, 0, player_sprite)
 
-            self.objects.append(player_object)
 
             UI = Interface()
-
-            self.display.fill((100, 150, 200)) # это надо переделать я пока чисто для теста это добавил
 
 
 
@@ -34,14 +31,16 @@ class Level:
                     game_over = True
                     break
                 # здесь сперва будет происходить пересчет всяких физических событий, в том числе пересчет коллизий
-                CheckCollisions(self)
 
                 # потом будет происходить отрисовка
                 self.display.fill((100, 150, 200)) 
                 for obj in self.objects:
+                    obj.MoveObj()
+                    player_object.collide(obj)
                     self.display.blit(obj.GetSprite(), (obj.rect.x, obj.rect.y))
                     continue
-
+                
+                self.display.blit(player_object.GetSprite(), (player_object.rect.x, player_object.rect.y))
 
                 pygame.display.update()
                 # потом будет происходить обработка действий игрока
@@ -50,5 +49,5 @@ class Level:
 
                 self.clock.tick(10)
                 continue
-            if not(game_over):
+            if game_over:
                 break
