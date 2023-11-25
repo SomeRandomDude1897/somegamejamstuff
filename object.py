@@ -1,4 +1,6 @@
 from animation import Animation
+from pygame import *
+
 class Object:
     def __init__(self, start_x, start_y, width, heigth, is_threat, idle_animation):
         self.x = start_x
@@ -18,3 +20,17 @@ class Object:
         return
     def Rotate(self):
         return
+
+PLATFORM_WIDTH = 32
+PLATFORM_HEIGHT = 32
+PLATFORM_COLOR = "#FF6262"
+
+class Platform(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
+        self.image.fill(Color(PLATFORM_COLOR))
+        self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
+    def GetSprite(self):
+        sprite = self.idle_animation.GetFrame()
+        self.idle_animation.MoveFrame()
