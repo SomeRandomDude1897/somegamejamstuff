@@ -7,4 +7,6 @@ class MovingObject(Object):
         self.to_x = to_x
         self.to_y = to_y
 
+    #def jump():
+    #def move():
     # ну и дальше чета какие-то методы его движения

@@ -4,7 +4,7 @@ from animation import Animation
 from object import Object
 import sys
 
-W = 1080
+W = 720
 H = 720
 
 clock = pygame.time.Clock()
