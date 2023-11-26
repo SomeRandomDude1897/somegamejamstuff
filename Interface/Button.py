@@ -9,12 +9,12 @@ class Button:
 
         self.rect = pygame.Rect(x, y, width, height)
 
-    def __is_clicked(self, pos):
+    def is_clicked(self, pos):
         """Проверяет, попала ли точка в прямоугольник"""
         return self.rect.collidepoint(pos)
 
     def process_click(self, pos):
-        if self.__is_clicked(pos) and self.action:
+        if self.is_clicked(pos) and self.action:
             self.action()
 
     def draw(self, surface, x_offset=0, y_offset=0):
